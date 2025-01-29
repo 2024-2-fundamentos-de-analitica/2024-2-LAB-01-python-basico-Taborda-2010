@@ -13,14 +13,32 @@ def pregunta_09():
 
     Rta/
     {'aaa': 13,
-     'bbb': 16,
-     'ccc': 23,
-     'ddd': 23,
-     'eee': 15,
-     'fff': 20,
-     'ggg': 13,
-     'hhh': 16,
-     'iii': 18,
-     'jjj': 18}}
+    'bbb': 16,
+    'ccc': 23,
+    'ddd': 23,
+    'eee': 15,
+    'fff': 20,
+    'ggg': 13,
+    'hhh': 16,
+    'iii': 18,
+    'jjj': 18}}
 
     """
+
+    conteo = {}
+    with open('files/input/data.csv', 'r') as archivo:
+        for fila in archivo:
+            partes = fila.strip().split('\t')
+            col5 = partes[4].split(",")
+            for elemento in col5:
+                clave, valor = elemento.split(":")
+                valor = int(valor)
+                if clave in conteo:
+                    conteo[clave] += 1 
+                else:
+                    conteo[clave] = 1
+    conteo_ordenado = dict(sorted(conteo.items()))
+
+    return conteo_ordenado
+
+print(pregunta_09())

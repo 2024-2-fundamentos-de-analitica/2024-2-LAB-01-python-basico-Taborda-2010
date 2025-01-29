@@ -16,3 +16,21 @@ def pregunta_11():
 
 
     """
+
+    acumulador = {}
+    with open('files/input/data.csv', 'r') as archivo:
+        for fila in archivo:
+            partes = fila.strip().split('\t')
+            valor_col2 = int(partes[1])
+            letras_col4 = partes[3].split(',')
+            for letra in letras_col4:
+                if letra in acumulador:
+                    acumulador[letra] += valor_col2
+                else:
+                    acumulador[letra] = valor_col2
+
+    acumulador_ordenado = dict(sorted(acumulador.items()))
+
+    return acumulador_ordenado
+
+print(pregunta_11())

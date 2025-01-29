@@ -15,3 +15,18 @@ def pregunta_03():
     [('A', 53), ('B', 36), ('C', 27), ('D', 31), ('E', 67)]
 
     """
+
+    acumulador = {}
+    with open('files/input/data.csv', 'r') as archivo:
+        for fila in archivo:
+            inicial = fila[0]
+            partes = fila.split('\t')
+            if inicial in acumulador:
+                acumulador[inicial] += int(partes[1])
+            else:
+                acumulador[inicial] = int(partes[1])
+
+        ordenado = sorted(acumulador.items())
+    return (ordenado)
+
+print(pregunta_03())

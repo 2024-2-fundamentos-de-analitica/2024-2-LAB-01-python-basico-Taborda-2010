@@ -16,14 +16,30 @@ def pregunta_08():
 
     Rta/
     [(0, ['C']),
-     (1, ['B', 'E']),
-     (2, ['A', 'E']),
-     (3, ['A', 'B', 'D', 'E']),
-     (4, ['B', 'E']),
-     (5, ['B', 'C', 'D', 'E']),
-     (6, ['A', 'B', 'C', 'E']),
-     (7, ['A', 'C', 'D', 'E']),
-     (8, ['A', 'B', 'D', 'E']),
-     (9, ['A', 'B', 'C', 'E'])]
+    (1, ['B', 'E']),
+    (2, ['A', 'E']),
+    (3, ['A', 'B', 'D', 'E']),
+    (4, ['B', 'E']),
+    (5, ['B', 'C', 'D', 'E']),
+    (6, ['A', 'B', 'C', 'E']),
+    (7, ['A', 'C', 'D', 'E']),
+    (8, ['A', 'B', 'D', 'E']),
+    (9, ['A', 'B', 'C', 'E'])]
 
     """
+    registros = {}
+    with open('files/input/data.csv', 'r') as archivo:
+        for fila in archivo:
+            partes = fila.strip().split('\t')
+            valor_col2 = int(partes[1])
+            letra_col1 = partes[0]
+            if valor_col2 in registros:
+                if letra_col1 not in registros[valor_col2]:
+                    registros[valor_col2].append(letra_col1)
+            else:
+                registros[valor_col2] = [letra_col1]
+
+    resultado = [(clave, sorted(lista_letras)) for clave, lista_letras in sorted(registros.items())]
+    return resultado
+
+print(pregunta_08())

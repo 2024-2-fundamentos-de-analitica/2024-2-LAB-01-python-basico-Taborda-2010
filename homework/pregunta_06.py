@@ -15,14 +15,32 @@ def pregunta_06():
 
     Rta/
     [('aaa', 1, 9),
-     ('bbb', 1, 9),
-     ('ccc', 1, 10),
-     ('ddd', 0, 9),
-     ('eee', 1, 7),
-     ('fff', 0, 9),
-     ('ggg', 3, 10),
-     ('hhh', 0, 9),
-     ('iii', 0, 9),
-     ('jjj', 5, 17)]
+    ('bbb', 1, 9),
+    ('ccc', 1, 10),
+    ('ddd', 0, 9),
+    ('eee', 1, 7),
+    ('fff', 0, 9),
+    ('ggg', 3, 10),
+    ('hhh', 0, 9),
+    ('iii', 0, 9),
+    ('jjj', 5, 17)]
 
     """
+    diccionario = {}
+    with open('files/input/data.csv', 'r') as archivo:
+        for fila in archivo:
+            partes = fila.strip().split('\t')
+            col5 = partes[4].split(",")
+            for elemento in col5:
+                clave, valor = elemento.split(":")
+                valor = int(valor)
+                if clave in diccionario:
+                    max_val, min_val = diccionario[clave]
+                    diccionario[clave] = (max(max_val, valor), min(min_val, valor))
+                else:
+                    diccionario[clave] = (valor, valor)
+
+    ordenado = [(clave, min_val, max_val) for clave, (max_val, min_val) in sorted(diccionario.items())]
+    return ordenado
+
+print(pregunta_06())
